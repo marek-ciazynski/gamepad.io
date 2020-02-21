@@ -1,14 +1,14 @@
 export default class EventDispatcher {
-	private events: Map<String, Function[]>;
+	private events: Map<string, Function[]>;
 
-	constructor(eventNames: String[]) {
+	constructor(eventNames: string[]) {
 		this.events = new Map();
 		for (const eventName of eventNames) {
 			this.events.set(eventName, []);
 		}
 	}
 
-	on(eventName: String, callback: Function) {
+	on(eventName: string, callback: Function) {
 		const handlers = this.events.get(eventName);
 		if (handlers === undefined)
 			throw Error('Event not registered')
@@ -16,7 +16,7 @@ export default class EventDispatcher {
 		handlers.push(callback)
 	}
 
-	off(eventName: String, callback?: Function) {
+	off(eventName: string, callback?: Function) {
 		const handlers = this.events.get(eventName);
 		if (handlers === undefined)
 			throw Error('Event not registered')
@@ -29,7 +29,7 @@ export default class EventDispatcher {
 		}
 	}
 
-	emit(eventName: String, ...args: any[]) {
+	emit(eventName: string, ...args: any[]) {
 		const handlers = this.events.get(eventName);
 		if (handlers === undefined)
 			throw Error('Event not registered')

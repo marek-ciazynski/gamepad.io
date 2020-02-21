@@ -1,9 +1,15 @@
 <html>
 	<head>
-		<title>Gamepad.io</title> 
+		<title>Gamepad.io</title>
+		<script src="GameServer.js"></script>
 	</head>
 
 	<body>
 		<h1>Gamepad.io</h1>
+
+		<script>
+			const server = new GameServer('localhost:8080');
+			console.log(server);
+		</script>
 	</body>
 </html>

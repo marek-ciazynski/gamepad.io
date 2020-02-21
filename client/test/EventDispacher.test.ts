@@ -18,7 +18,7 @@ describe('EventDispatcher', () => {
 
 	it('accepts multiple arguments in handler', (done) => {
 		const dispatcher = new EventDispatcher(['foo'])
-		dispatcher.on('foo', (x: number, y: String) => {
+		dispatcher.on('foo', (x: number, y: string) => {
 			expect(x).toBe(42)
 			expect(y).toBe('bar')
 			done()

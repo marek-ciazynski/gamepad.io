@@ -4,6 +4,7 @@
   "description": "",
   "main": "gameserver.js",
   "scripts": {
+    "build": "parcel build GameServer.ts && cp dist/GameServer.js ../public/GameServer.js",
     "test": "jest",
     "coverage": "jest --coverage"
   },
