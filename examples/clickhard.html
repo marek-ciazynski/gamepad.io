@@ -1,0 +1,50 @@
+<!DOCTYPE>
+<html>
+<head>
+    <script src="http://gamepad.io:1234/gameserver.js"></script>
+</head>
+
+<body>
+
+</body>
+
+http://gamepad.io/join?room_id=...&user_id=...
+</html>
+
+<script>
+const server = new GameServer('http://gamepad.io:1234');
+
+server.connect.then((server) => {
+    console.log(server.roomToken); // => 68b329da9893e34099c7d8ad5cb9c940
+    server.createPrayers(4).then((players) => {
+        for(let player of players) {
+            player.join_link
+            document.appendChild(player.qrImg);
+        }
+    });
+}).catch(() => {
+    alert('Something went\'s wrong');
+});
+
+server.on('player-connected', (player) => {
+    alert(player.id + ' connected!');
+    console.log(player.id, player.qrImg, player.connected, player.gamepad);
+
+    player.set_gamepad(undefined);
+    
+    if(server.players.every((player) => player.connected))
+        startGame();
+});
+
+server.on('player-disconnected', (player) => {
+    alert(player.id + ' disconnected!');
+  
+    if(!server.players.every((player) => player.connected))
+        stopGame();
+});
+
+server.on('gamepad-event', (event) => {
+    event.player.rumble('.--..-.----.');
+});
+
+</script>
